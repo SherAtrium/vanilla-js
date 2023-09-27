@@ -1,0 +1,57 @@
+:root {
+  /* BLACK - GRAY */
+  --gray-900: #121212;
+  --gray-800: #171717;
+  --gray-700: #202020;
+  --gray-600: #2f2f2f;
+  --gray-500: #818181;
+  --gray-400: #d3d3d3;
+
+  /* WHITE */
+  --white: #ffffff;
+
+  /* COLORED */
+  --red: #c50000;
+  --orange: #ef4423;
+  --yellow: #ff9526;
+
+  /* LAYOUT */
+  --aside-width: calc(100% / 4);
+  --main-width: calc(100% - var(--aside-width));
+}
+
+* {
+  color: var(--white);
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--gray-900);
+}
+
+aside {
+  width: var(--aside-width);
+  height: 100%;
+  float: left;
+  padding: 2rem 1.5rem;
+  background-color: var(--gray-800);
+}
+
+aside hr {
+  margin: 1rem 0;
+  border: none;
+  border-bottom: 1px solid var(--gray-600);
+}
+
+main {
+  width: var(--main-width);
+  height: 100%;
+  float: right;
+}
