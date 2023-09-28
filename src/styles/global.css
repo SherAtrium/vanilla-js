@@ -25,6 +25,10 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 html,
 body {
   height: 100%;
@@ -39,7 +43,7 @@ body {
 
 aside {
   width: var(--aside-width);
-  height: 100%;
+  min-height: 100%;
   float: left;
   padding: 2rem 1.5rem;
   background-color: var(--gray-800);
@@ -51,13 +55,52 @@ aside hr {
   border-bottom: 1px solid var(--gray-600);
 }
 
-aside p {
+aside > p {
   font-weight: 700;
   font-size: 1.5rem;
 }
 
+aside a.allGames {
+  display: block;
+  color: var(--yellow);
+  margin: 1.5rem 0;
+}
+
+aside ul.genres {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+aside ul.genres .genre {
+  margin: 0.5rem 0;
+  border-radius: 0.5rem;
+}
+
+aside ul.genres .genre a {
+  display: flex;
+  align-items: center;
+}
+
+aside ul.genres .genre:hover {
+  transition: background-color 0.1s ease-in-out;
+  background-color: var(--gray-700);
+}
+
+aside ul.genres .genre img {
+  width: 45px;
+  height: 45px;
+  margin-right: 0.5rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+aside ul.genres .genre p {
+  margin: 0;
+}
+
 main {
   width: var(--main-width);
-  height: 100%;
+  min-height: 100%;
   float: right;
 }

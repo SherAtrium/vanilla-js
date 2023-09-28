@@ -9,7 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./src/styles/global.css" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
     <script src="/src/app.js" defer type="module"></script>
     <title>Game Center</title>
   </head>
@@ -18,10 +18,17 @@
       <img src="./src/assets/logotype.svg" alt="Game Center" />
       <hr />
       <p>Genres</p>
+
+      <a class="allGames link" href="/">See all games</a>
+
+      <ul class="genres"></ul>
     </aside>
+
     <main></main>
 
     <!-- TEMPLATES -->
-    <template id="aside-menu"> </template>
+    <template id="aside-menu">
+      <ul class="genres"></ul>
+    </template>
   </body>
 </html>
