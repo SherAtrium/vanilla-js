@@ -20,6 +20,30 @@
   --main-width: calc(100% - var(--aside-width));
 }
 
+/* CUSTOM SCROLL BAR */
+::-webkit-scrollbar {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: var(--gray-900);
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--gray-700);
+  border-radius: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--gray-600);
+}
+
 * {
   color: var(--white);
   box-sizing: border-box;
@@ -43,9 +67,10 @@ body {
 
 aside {
   width: var(--aside-width);
-  min-height: 100%;
+  height: 100%;
   float: left;
   padding: 2rem 1.5rem;
+  overflow-x: scroll;
   background-color: var(--gray-800);
 }
 
@@ -101,6 +126,8 @@ aside ul.genres .genre p {
 
 main {
   width: var(--main-width);
-  min-height: 100%;
+  height: 100%;
   float: right;
+  padding: 2rem 1.5rem;
+  overflow-x: scroll;
 }

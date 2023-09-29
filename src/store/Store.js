@@ -1,6 +1,7 @@
 const Store = {
   genres: null,
   games: null,
+  favoriteList: null,
 };
 
 const _proxyStore = new Proxy(Store, {
@@ -8,11 +9,15 @@ const _proxyStore = new Proxy(Store, {
     target[property] = value;
 
     if (property === 'genres') {
-      window.dispatchEvent(new Event('onchangegenres'));
+      window.dispatchEvent(new Event('onChangeGenres'));
     }
 
     if ((property = 'games')) {
-      window.dispatchEvent(new Event('onchangegames'));
+      window.dispatchEvent(new Event('onChangeGames'));
+    }
+
+    if (property === 'favoriteList') {
+      window.dispatchEvent(new Event('onChangeFavoriteList'));
     }
 
     return true;
@@ -20,12 +25,3 @@ const _proxyStore = new Proxy(Store, {
 });
 
 export default _proxyStore;
-
-// Store logs
-// window.addEventListener('onchangegenres', () =>
-//   console.log('Store[genres] was updated:', app.store.genres)
-// );
-
-// window.addEventListener('onchangegames', () =>
-//   console.log('Store[games] was updated:', app.store.games)
-// );

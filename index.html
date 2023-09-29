@@ -19,7 +19,7 @@
       <hr />
       <p>Genres</p>
 
-      <a class="allGames link" href="/">See all games</a>
+      <a class="allGames link" href="/">All games</a>
 
       <ul class="genres"></ul>
     </aside>
@@ -27,8 +27,23 @@
     <main></main>
 
     <!-- TEMPLATES -->
-    <template id="aside-menu">
-      <ul class="genres"></ul>
+    <template id="gameList">
+      <h2></h2>
+    </template>
+
+    <template id="gameCard">
+      <img src="" alt="" />
+      <ul class="platforms"></ul>
+      <p class="title"></p>
+      <div class="releaseDate">
+        <span class="releaseDateTitle">Release date:</span>
+        <span class="releaseDateValue"></span>
+      </div>
+      <div class="releatedGenres">
+        <span class="releatedGenresTitle">Genres:</span>
+        <span class="releatedGenresValue"></span>
+      </div>
+      <button class="favoriteButton">Add to favorite</button>
     </template>
   </body>
 </html>

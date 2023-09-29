@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
   const genresElement = document.querySelector('.genres');
 
-  window.addEventListener('onchangegenres', () => {
+  window.addEventListener('onChangeGenres', () => {
     if (app.store.genres) {
       app.store.genres.forEach((item) => {
         const template = `

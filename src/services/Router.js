@@ -31,7 +31,7 @@ const Router = {
 
     switch (route) {
       case '/':
-        pageElement = document.createElement('app-genres');
+        pageElement = document.createElement('game-list');
         break;
 
       default:
@@ -44,6 +44,7 @@ const Router = {
       // without clearing innerHTML we all the time push element to the DOM
       cache.innerHTML = '';
       cache.appendChild(pageElement);
+
       // go to the up all the time when router changes
       window.scrollX = 0;
       window.scrollY = 0;
