@@ -1,4 +1,6 @@
 import { loadCSS } from '../../utils/loadCSS.js';
+import { getGamesByGenreId, loadAllGames } from '../../services/API.js';
+import { getGenreTitleById } from '../../utils/getGenreTitleById.js';
 
 class GameList extends HTMLElement {
   constructor() {
@@ -9,9 +11,13 @@ class GameList extends HTMLElement {
     loadCSS('/src/components/GameList/GameList.css', style);
 
     this.root.appendChild(style);
+
+    this.renderHandler = this.render.bind(this);
+    window.addEventListener('onChangeGames', this.renderHandler);
   }
 
   connectedCallback() {
+    // console.log('connected');
     const template = document.getElementById('gameList');
     const content = template.content.cloneNode(true);
     this.root.appendChild(content);
@@ -19,38 +25,27 @@ class GameList extends HTMLElement {
     this.root.querySelector('.template').style.opacity = 0;
     this.root.querySelector('.template').scrollTo(0, 0);
 
-    this.render();
+    if (this.dataset.genreId) {
+      getGamesByGenreId(Number(this.dataset.genreId));
+    } else {
+      loadAllGames();
+    }
   }
 
-  filterDataByGenre(id) {
-    const result = {
-      data: [],
-      name: '',
-    };
-    result.data = app.store.games.filter((game) =>
-      game.genres.find((genre) => {
-        if (genre.id === id) {
-          result.name = genre.name;
-          return true;
-        }
-        return false;
-      })
-    );
-
-    return result;
+  disconnectedCallback() {
+    // console.log('disconnected');
+    window.removeEventListener('onChangeGames', this.renderHandler);
   }
 
   render() {
-    if (app.store.games) {
-      const genreId = Number(this.dataset.genreId);
-      const filteredData = genreId
-        ? this.filterDataByGenre(Number(genreId))
-        : null;
-      let games = filteredData ? filteredData.data : app.store.games;
-
-      this.root.querySelector('h2').textContent = filteredData
-        ? filteredData.name
+    const games = app.store.games;
+    // console.log('render', games);
+    if (games) {
+      this.root.querySelector('h2').textContent = this.dataset.genreId
+        ? getGenreTitleById(Number(this.dataset.genreId), app.store.genres)
         : 'All Games';
+
+      this.root.querySelector('div.list').textContent = '';
 
       if (games.length === 0) {
         this.root.querySelector('div.list').innerHTML =

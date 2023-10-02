@@ -1,6 +1,6 @@
 import { loadAllGames, loadGenres } from './services/API.js';
 import Store from './store/Store.js';
-import Router from './services/Router.js';
+import Router from './router/Router.js';
 
 // Load Components
 import './components/Genres/Genres.js';

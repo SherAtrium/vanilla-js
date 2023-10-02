@@ -103,14 +103,18 @@ aside ul.genres .genre {
   animation: fade-in-bottom 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
-aside ul.genres .genre a {
-  display: flex;
-  align-items: center;
-}
-
 aside ul.genres .genre:hover {
   transition: background-color 0.1s ease-in-out;
   background-color: var(--gray-700);
+}
+
+aside ul.genres .genre.active {
+  background-color: var(--gray-600);
+}
+
+aside ul.genres .genre a {
+  display: flex;
+  align-items: center;
 }
 
 aside ul.genres .genre img {

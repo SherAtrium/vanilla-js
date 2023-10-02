@@ -1,3 +1,5 @@
+import { getIdFromPathname } from './utils.js';
+
 const Router = {
   init: () => {
     document.querySelectorAll('a.link').forEach((a) => {
@@ -24,7 +26,13 @@ const Router = {
       // in state we can add more stuff:
       // like screen position, when we go to some page and go back we can scroll to the previous position.
       // and we need route in state that we can get access to it within popstate listener
-      history.pushState({ route }, '', route);
+      history.pushState(
+        { route, paramId: getIdFromPathname(route) },
+        '',
+        route
+      );
+
+      window.dispatchEvent(new Event('onChangeRoute'));
     }
 
     let pageElement = null;
@@ -37,21 +45,21 @@ const Router = {
       default:
         if (route.startsWith('/genre')) {
           pageElement = document.createElement('game-list');
-          const paramId = route.substring(route.lastIndexOf('/') + 1);
+          const paramId = history.state.paramId;
           pageElement.dataset.genreId = paramId;
         }
         break;
     }
 
     if (pageElement) {
-      window.scrollX = 0;
-      window.scrollY = 0;
-
       const cache = document.querySelector('main');
       // This will be rendered many times
       // without clearing innerHTML we all the time push element to the DOM
       cache.innerHTML = '';
       cache.appendChild(pageElement);
+
+      window.scrollX = 0;
+      window.scrollY = 0;
     } else {
       document.querySelector('main').innerHTML = 'Oops, 404 Page Not Found!';
     }
