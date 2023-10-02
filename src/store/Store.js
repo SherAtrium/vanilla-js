@@ -12,10 +12,6 @@ const _proxyStore = new Proxy(Store, {
       window.dispatchEvent(new Event('onChangeGenres'));
     }
 
-    if ((property = 'games')) {
-      window.dispatchEvent(new Event('onChangeGames'));
-    }
-
     if (property === 'favoriteList') {
       window.dispatchEvent(new Event('onChangeFavoriteList'));
     }

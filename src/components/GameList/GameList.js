@@ -16,9 +16,9 @@ class GameList extends HTMLElement {
     const content = template.content.cloneNode(true);
     this.root.appendChild(content);
 
-    window.addEventListener('onChangeGames', () => {
-      this.render();
-    });
+    this.root.querySelector('.template').style.opacity = 0;
+    this.root.querySelector('.template').scrollTo(0, 0);
+
     this.render();
   }
 
@@ -53,6 +53,8 @@ class GameList extends HTMLElement {
         : 'All Games';
 
       if (games.length === 0) {
+        this.root.querySelector('div.list').innerHTML =
+          'No data has been found :(';
       } else {
         const gameCards = games.map((game) => {
           const gameCard = document.createElement('game-card');

@@ -13,7 +13,7 @@ const Router = {
       Router.go(event.state.route, false);
     });
 
-    // We want to render initial component when first page opens
+    // We want to render initial component when first page opens or manually refresh happens
     const path = location.pathname === '/' ? '/all-games' : location.pathname;
     Router.go(path);
   },
@@ -30,10 +30,7 @@ const Router = {
     let pageElement = null;
 
     switch (route) {
-      case '/':
       case '/all-games':
-        // we can implement redirection
-        // redirect('/all-games');
         pageElement = document.createElement('game-list');
         break;
 
@@ -47,15 +44,14 @@ const Router = {
     }
 
     if (pageElement) {
+      window.scrollX = 0;
+      window.scrollY = 0;
+
       const cache = document.querySelector('main');
       // This will be rendered many times
       // without clearing innerHTML we all the time push element to the DOM
       cache.innerHTML = '';
       cache.appendChild(pageElement);
-
-      // go to the up all the time when router changes
-      window.scrollX = 0;
-      window.scrollY = 0;
     } else {
       document.querySelector('main').innerHTML = 'Oops, 404 Page Not Found!';
     }

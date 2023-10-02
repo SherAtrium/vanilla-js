@@ -53,12 +53,8 @@ a {
   text-decoration: none;
 }
 
-html,
 body {
-  height: 100%;
-}
-
-body {
+  display: flex;
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
@@ -66,9 +62,10 @@ body {
 }
 
 aside {
+  position: sticky;
+  top: 0;
   width: var(--aside-width);
-  height: 100%;
-  float: left;
+  height: 100vh;
   padding: 2rem 1.5rem;
   overflow-x: scroll;
   background-color: var(--gray-800);
@@ -100,6 +97,10 @@ aside ul.genres {
 aside ul.genres .genre {
   margin: 0.5rem 0;
   border-radius: 0.5rem;
+  opacity: 0;
+  -webkit-animation: fade-in-bottom 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)
+    both;
+  animation: fade-in-bottom 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 aside ul.genres .genre a {
@@ -126,8 +127,31 @@ aside ul.genres .genre p {
 
 main {
   width: var(--main-width);
-  height: 100%;
-  float: right;
   padding: 2rem 1.5rem;
   overflow-x: scroll;
+}
+
+@-webkit-keyframes fade-in-bottom {
+  0% {
+    -webkit-transform: translateY(15px);
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-bottom {
+  0% {
+    -webkit-transform: translateY(515px0px);
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
