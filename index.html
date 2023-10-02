@@ -19,7 +19,7 @@
       <hr />
       <p>Genres</p>
 
-      <a class="allGames link" href="/">All games</a>
+      <a class="allGames link" href="/all-games">All games</a>
 
       <ul class="genres"></ul>
     </aside>
@@ -29,21 +29,26 @@
     <!-- TEMPLATES -->
     <template id="gameList">
       <h2></h2>
+      <div class="list"></div>
     </template>
 
     <template id="gameCard">
-      <img src="" alt="" />
-      <ul class="platforms"></ul>
-      <p class="title"></p>
-      <div class="releaseDate">
-        <span class="releaseDateTitle">Release date:</span>
-        <span class="releaseDateValue"></span>
+      <div class="card">
+        <img src="" alt="" />
+        <div class="content">
+          <ul class="platforms"></ul>
+          <a href="" class="title link"></a>
+          <div class="releaseDate">
+            <span class="releaseDateTitle">Release date:</span>
+            <span class="releaseDateValue"></span>
+          </div>
+          <div class="relatedGenres">
+            <span class="relatedGenresTitle">Genres:</span>
+            <span class="relatedGenresValue"></span>
+          </div>
+          <button class="favoriteButton">Add to favorite</button>
+        </div>
       </div>
-      <div class="releatedGenres">
-        <span class="releatedGenresTitle">Genres:</span>
-        <span class="releatedGenresValue"></span>
-      </div>
-      <button class="favoriteButton">Add to favorite</button>
     </template>
   </body>
 </html>

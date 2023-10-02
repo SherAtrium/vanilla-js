@@ -6,9 +6,9 @@ class GameList extends HTMLElement {
     this.root = this.attachShadow({ mode: 'open' });
 
     const style = document.createElement('style');
-    this.root.appendChild(style);
-
     loadCSS('/src/components/GameList/GameList.css', style);
+
+    this.root.appendChild(style);
   }
 
   connectedCallback() {
@@ -22,16 +22,45 @@ class GameList extends HTMLElement {
     this.render();
   }
 
+  filterDataByGenre(id) {
+    const result = {
+      data: [],
+      name: '',
+    };
+    result.data = app.store.games.filter((game) =>
+      game.genres.find((genre) => {
+        if (genre.id === id) {
+          result.name = genre.name;
+          return true;
+        }
+        return false;
+      })
+    );
+
+    return result;
+  }
+
   render() {
     if (app.store.games) {
-      this.root.querySelector('h2').textContent = 'All Games';
+      const genreId = Number(this.dataset.genreId);
+      const filteredData = genreId
+        ? this.filterDataByGenre(Number(genreId))
+        : null;
+      let games = filteredData ? filteredData.data : app.store.games;
 
-      app.store.games.forEach((game) => {
-        const gameCard = document.createElement('game-card');
-        gameCard.dataset.gameId = JSON.stringify(game.id);
-        // TODO: call game-card component
-        this.root.appendChild(gameCard);
-      });
+      this.root.querySelector('h2').textContent = filteredData
+        ? filteredData.name
+        : 'All Games';
+
+      if (games.length === 0) {
+      } else {
+        const gameCards = games.map((game) => {
+          const gameCard = document.createElement('game-card');
+          gameCard.dataset.gameId = JSON.stringify(game.id);
+          return gameCard;
+        });
+        this.root.querySelector('div.list').append(...gameCards);
+      }
     } else {
       this.root.querySelector('h2').textContent = 'Loading...';
     }

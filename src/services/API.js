@@ -1,6 +1,6 @@
 const API = {
-  _genres_url: 'src/mockData/genres.json',
-  _all_games_url: 'src/mockData/games.json',
+  _genres_url: '/src/mockData/genres.json',
+  _all_games_url: '/src/mockData/games.json',
 
   async fetchGenres() {
     const response = await fetch(API._genres_url);

@@ -3,7 +3,7 @@ const Router = {
     document.querySelectorAll('a.link').forEach((a) => {
       a.addEventListener('click', (event) => {
         event.preventDefault();
-        const url = event.target.getAttribute('href');
+        const url = event.currentTarget.getAttribute('href');
         Router.go(url);
       });
     });
@@ -14,8 +14,8 @@ const Router = {
     });
 
     // We want to render initial component when first page opens
-    // We need to render Menu
-    Router.go(location.pathname);
+    const path = location.pathname === '/' ? '/all-games' : location.pathname;
+    Router.go(path);
   },
 
   // addToHistory - when user goes back we don't need to save it to history
@@ -31,10 +31,18 @@ const Router = {
 
     switch (route) {
       case '/':
+      case '/all-games':
+        // we can implement redirection
+        // redirect('/all-games');
         pageElement = document.createElement('game-list');
         break;
 
       default:
+        if (route.startsWith('/genre')) {
+          pageElement = document.createElement('game-list');
+          const paramId = route.substring(route.lastIndexOf('/') + 1);
+          pageElement.dataset.genreId = paramId;
+        }
         break;
     }
 
@@ -49,7 +57,7 @@ const Router = {
       window.scrollX = 0;
       window.scrollY = 0;
     } else {
-      document.querySelector('main').innerHTML = 'Oops, 404 Not Found!';
+      document.querySelector('main').innerHTML = 'Oops, 404 Page Not Found!';
     }
   },
 };

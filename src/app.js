@@ -13,8 +13,9 @@ app.router = Router;
 
 // It is better to wait for the event for manipulation
 window.addEventListener('DOMContentLoaded', () => {
-  Promise.all([loadGenres(), loadAllGames()]).catch((e) =>
-    console.error(`Error message: ${e.message}`)
-  );
-  app.router.init();
+  Promise.all([loadGenres(), loadAllGames()])
+    .then(() => {
+      app.router.init();
+    })
+    .catch((e) => console.error(`Error message: ${e.message}`));
 });
