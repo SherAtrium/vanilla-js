@@ -1,5 +1,3 @@
-import { loadCSS } from '../../utils/loadCSS.js';
-
 class GameCard extends HTMLElement {
   constructor() {
     super();
@@ -22,11 +20,11 @@ class GameCard extends HTMLElement {
 
   getPlatformIcon = (name) => {
     const availableIcons = {
-      playstation: '/src/assets/icons/playstation4.svg',
-      linux: '/src/assets/icons/linux.svg',
-      mobile: '/src/assets/icons/mobile.svg',
-      'xbox-one': '/src/assets/icons/xbox-one.svg',
-      'nintendo-switch': '/src/assets/icons/nintendo-switch.svg',
+      playstation: '/assets/icons/playstation4.svg',
+      linux: '/assets/icons/linux.svg',
+      mobile: '/assets/icons/mobile.svg',
+      'xbox-one': '/assets/icons/xbox-one.svg',
+      'nintendo-switch': '/assets/icons/nintendo-switch.svg',
     };
 
     if (name.startsWith('playstation')) {

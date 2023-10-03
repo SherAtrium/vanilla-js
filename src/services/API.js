@@ -1,10 +1,9 @@
-const _API = {
-  genres_url: '/src/mockData/genres.json',
-  all_games_url: '/src/mockData/games.json',
+import { ALL_GAMES_URL, GENRES_URL } from '../utils/constants.js';
 
+export const api = {
   async fetchGenres() {
     try {
-      const response = await fetch(this.genres_url);
+      const response = await fetch(GENRES_URL);
       const data = await response.json();
       return data.results;
     } catch (error) {
@@ -14,7 +13,7 @@ const _API = {
 
   async fetchAllGames() {
     try {
-      const response = await fetch(this.all_games_url);
+      const response = await fetch(ALL_GAMES_URL);
       const data = await response.json();
       return data.results;
     } catch (error) {
@@ -23,17 +22,27 @@ const _API = {
   },
 };
 
-export async function loadGenres() {
-  app.store.genres = await _API.fetchGenres();
-}
+export const middleware = {
+  async loadGenres() {
+    const data = await api.fetchGenres();
+    if (data) {
+      app.store.genres = data;
+    }
+  },
 
-export async function loadAllGames() {
-  app.store.games = await _API.fetchAllGames();
-}
+  async loadAllGames() {
+    const data = await api.fetchAllGames();
+    if (data) {
+      app.store.games = data;
+    }
+  },
 
-export async function getGamesByGenreId(id) {
-  const data = await _API.fetchAllGames();
-  app.store.games = data.filter((game) =>
-    game.genres.find((genre) => genre.id === id)
-  );
-}
+  async getGamesByGenreId(id) {
+    const data = await api.fetchAllGames();
+    if (data) {
+      app.store.games = data.filter((game) =>
+        game.genres.find((genre) => genre.id === id)
+      );
+    }
+  },
+};

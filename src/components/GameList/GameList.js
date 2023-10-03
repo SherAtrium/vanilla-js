@@ -1,6 +1,6 @@
-import { loadCSS } from '../../utils/loadCSS.js';
-import { getGamesByGenreId, loadAllGames } from '../../services/API.js';
+import { middleware } from '../../services/api.js';
 import { getGenreTitleById } from '../../utils/getGenreTitleById.js';
+import { loadCSS } from '../../utils/loadCSS.js';
 
 class GameList extends HTMLElement {
   constructor() {
@@ -26,9 +26,9 @@ class GameList extends HTMLElement {
     this.root.querySelector('.template').scrollTo(0, 0);
 
     if (this.dataset.genreId) {
-      getGamesByGenreId(Number(this.dataset.genreId));
+      middleware.getGamesByGenreId(Number(this.dataset.genreId));
     } else {
-      loadAllGames();
+      middleware.loadAllGames();
     }
   }
 

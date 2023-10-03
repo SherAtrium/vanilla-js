@@ -1,11 +1,11 @@
-import { loadAllGames, loadGenres } from './services/API.js';
-import Store from './store/Store.js';
 import Router from './router/Router.js';
+import { middleware } from './services/api.js';
+import Store from './store/Store.js';
 
 // Load Components
-import './components/Genres/Genres.js';
-import './components/GameList/GameList.js';
 import './components/GameCard/GameCard.js';
+import './components/GameList/GameList.js';
+import './components/Genres/Genres.js';
 
 window.app = {};
 app.store = Store;
@@ -13,7 +13,7 @@ app.router = Router;
 
 // It is better to wait for the event for manipulation
 window.addEventListener('DOMContentLoaded', () => {
-  Promise.all([loadGenres(), loadAllGames()])
+  Promise.all([middleware.loadGenres(), middleware.loadAllGames()])
     .then(() => {
       app.router.init();
     })

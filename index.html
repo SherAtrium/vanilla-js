@@ -15,7 +15,7 @@
   </head>
   <body>
     <aside>
-      <img src="/src/assets/logotype.svg" alt="Game Center" />
+      <img src="/assets/logotype.svg" alt="Game Center" />
       <hr />
       <p>Genres</p>
 
@@ -27,7 +27,18 @@
     <main></main>
 
     <!-- TEMPLATES -->
-    <template id="navBar"></template>
+    <template id="navBar">
+      <div class="goBack">
+        <!-- <img src="/src/assets/icons/goBack.svg" alt="" /> -->
+      </div>
+      <div class="favoriteList">
+        <span class="count"></span>
+        <img src="/assets/icons/favorite.svg" alt="" />
+      </div>
+      <div class="searchBar">
+        <input class="searchInput" type="text" placeholder="Search" />
+      </div>
+    </template>
 
     <template id="gameList">
       <div class="template">
