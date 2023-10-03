@@ -1,7 +1,7 @@
 const Store = {
   genres: null,
   games: null,
-  favoriteList: null,
+  favoriteList: [],
 };
 
 const _proxyStore = new Proxy(Store, {
@@ -12,7 +12,7 @@ const _proxyStore = new Proxy(Store, {
       window.dispatchEvent(new Event('onChangeGenres'));
     }
 
-    if ((property = 'games')) {
+    if (property === 'games') {
       window.dispatchEvent(new Event('onChangeGames'));
     }
 

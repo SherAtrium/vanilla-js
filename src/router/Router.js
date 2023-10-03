@@ -52,11 +52,18 @@ const Router = {
     }
 
     if (pageElement) {
-      const cache = document.querySelector('main');
+      const main = document.querySelector('main');
+
       // This will be rendered many times
       // without clearing innerHTML we all the time push element to the DOM
-      cache.innerHTML = '';
-      cache.appendChild(pageElement);
+      // main.innerHTML = '';
+      for (let element of main.children) {
+        if (element.tagName !== 'NAV-BAR') {
+          element.remove();
+        }
+      }
+
+      main.appendChild(pageElement);
 
       window.scrollX = 0;
       window.scrollY = 0;

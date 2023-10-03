@@ -2,7 +2,7 @@ import { middleware } from '../../services/api.js';
 import { getGenreTitleById } from '../../utils/getGenreTitleById.js';
 import { loadCSS } from '../../utils/loadCSS.js';
 
-class GameList extends HTMLElement {
+export class GameList extends HTMLElement {
   constructor() {
     super();
     this.root = this.attachShadow({ mode: 'open' });
@@ -63,5 +63,3 @@ class GameList extends HTMLElement {
     }
   }
 }
-
-customElements.define('game-list', GameList);

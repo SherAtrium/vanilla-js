@@ -20,8 +20,6 @@
       <p>Genres</p>
 
       <a class="allGames link" href="/all-games">All games</a>
-
-      <ul class="genres"></ul>
     </aside>
 
     <main></main>
@@ -35,9 +33,11 @@
         <span class="count"></span>
         <img src="/assets/icons/favorite.svg" alt="" />
       </div>
-      <div class="searchBar">
-        <input class="searchInput" type="text" placeholder="Search" />
-      </div>
+      <input class="searchInput" type="text" placeholder="Search" />
+    </template>
+
+    <template id="gameGenres">
+      <ul class="genres"></ul>
     </template>
 
     <template id="gameList">
@@ -61,7 +61,7 @@
             <span class="relatedGenresTitle">Genres:</span>
             <span class="relatedGenresValue"></span>
           </div>
-          <button class="favoriteButton">Add to favorite</button>
+          <button class="favoriteButton"></button>
         </div>
       </div>
     </template>
