@@ -6,7 +6,9 @@ const Router = {
       a.addEventListener('click', (event) => {
         event.preventDefault();
         const url = event.currentTarget.getAttribute('href');
-        Router.go(url);
+        if (url !== location.pathname) {
+          Router.go(url);
+        }
       });
     });
 
