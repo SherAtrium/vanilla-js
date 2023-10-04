@@ -38,10 +38,28 @@ export const middleware = {
   },
 
   async getGamesByGenreId(id) {
-    const data = await api.fetchAllGames();
+    let data = await api.fetchAllGames();
     if (data) {
+      if (app.store.dynamicSearch) {
+        data = data.filter((game) =>
+          game.name
+            .toLowerCase()
+            .includes(app.store.dynamicSearch.toLowerCase())
+        );
+      }
+
       app.store.games = data.filter((game) =>
         game.genres.find((genre) => genre.id === id)
+      );
+    }
+  },
+
+  async filterGamesByName(value) {
+    const data = await api.fetchAllGames();
+    if (data) {
+      app.store.dynamicSearch = value.trim();
+      app.store.games = data.filter((game) =>
+        game.name.toLowerCase().includes(value.trim().toLowerCase())
       );
     }
   },

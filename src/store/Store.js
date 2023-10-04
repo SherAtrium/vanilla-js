@@ -1,7 +1,8 @@
 const Store = {
-  genres: null,
-  games: null,
+  genres: [],
+  games: [],
   favoriteList: [],
+  dynamicSearch: '',
 };
 
 const _proxyStore = new Proxy(Store, {
@@ -19,6 +20,8 @@ const _proxyStore = new Proxy(Store, {
     if (property === 'favoriteList') {
       window.dispatchEvent(new Event('onChangeFavoriteList'));
     }
+
+    console.warn('store was updated');
 
     return true;
   },

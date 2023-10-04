@@ -74,7 +74,6 @@ export class GameCard extends HTMLElement {
   };
 
   render() {
-    console.log('render');
     const id = JSON.parse(this.dataset.gameId);
     const gameData = this.findDataById(id);
 

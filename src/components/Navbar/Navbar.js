@@ -1,6 +1,10 @@
+import { middleware } from '../../services/api.js';
+
 export class Navbar extends HTMLElement {
   constructor() {
     super();
+
+    this.timeoutId = null;
   }
 
   connectedCallback() {
@@ -12,6 +16,7 @@ export class Navbar extends HTMLElement {
   }
 
   render() {
+    console.log('render');
     const favoriteCount = this.querySelector('.count');
     // Favorite count
     window.addEventListener('onChangeFavoriteList', () => {
@@ -21,6 +26,16 @@ export class Navbar extends HTMLElement {
       } else {
         favoriteCount.classList.remove('visible');
       }
+    });
+
+    this.querySelector('.searchInput').addEventListener('input', (event) => {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+      }
+
+      this.timeoutId = setTimeout(() => {
+        middleware.filterGamesByName(event.target.value);
+      }, 256);
     });
   }
 }
