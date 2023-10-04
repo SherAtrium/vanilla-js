@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     aside.appendChild(gameGenres);
     main.appendChild(navBar);
+
     // Should be at the end all the time
     app.router.init();
   } catch (error) {

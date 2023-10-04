@@ -39,7 +39,6 @@ export class GameList extends HTMLElement {
 
   render() {
     const games = app.store.games;
-    // console.log('render', games);
     if (games) {
       this.root.querySelector('h2').textContent = this.dataset.genreId
         ? getGenreTitleById(Number(this.dataset.genreId), app.store.genres)

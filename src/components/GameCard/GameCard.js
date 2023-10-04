@@ -92,7 +92,6 @@ export class GameCard extends HTMLElement {
         .map((i) => i.name)
         .join(', ');
 
-      // FAVORITE LIST LOGIC -> REFACTOR
       favoriteButton.textContent = 'Add to favorite';
       favoriteButton.onclick = () => this.onFavoriteButtonClick(gameData);
 

@@ -12,7 +12,7 @@ const Router = {
       });
     });
 
-    // when we go back
+    // when we go back we don't want to add path to history
     window.addEventListener('popstate', (event) => {
       Router.go(event.state.route, false);
     });
@@ -22,7 +22,6 @@ const Router = {
     Router.go(path);
   },
 
-  // addToHistory - when user goes back we don't need to save it to history
   go: (route, addToHistory = true) => {
     if (addToHistory) {
       // in state we can add more stuff:
@@ -58,6 +57,8 @@ const Router = {
 
       // This will be rendered many times
       // without clearing innerHTML we all the time push element to the DOM
+
+      // we don't want to remove navbar in every render
       // main.innerHTML = '';
       for (let element of main.children) {
         if (element.tagName !== 'NAV-BAR') {
