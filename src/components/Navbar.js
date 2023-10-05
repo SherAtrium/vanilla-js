@@ -1,4 +1,4 @@
-import { middleware } from '../../services/api.js';
+import { middleware } from '../services/api.js';
 
 export class Navbar extends HTMLElement {
   constructor() {

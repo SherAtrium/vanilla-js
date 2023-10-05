@@ -1,6 +1,6 @@
-import { middleware } from '../../services/api.js';
-import { getGenreTitleById } from '../../utils/getGenreTitleById.js';
-import { loadCSS } from '../../utils/loadCSS.js';
+import { middleware } from '../services/api.js';
+import { getGenreTitleById } from '../utils/getGenreTitleById.js';
+import { loadCSS } from '../utils/loadCSS.js';
 
 export class GameList extends HTMLElement {
   constructor() {
@@ -8,7 +8,7 @@ export class GameList extends HTMLElement {
     this.root = this.attachShadow({ mode: 'open' });
 
     const style = document.createElement('style');
-    loadCSS('/src/components/GameList/GameList.css', style);
+    loadCSS('/src/styles/GameList.css', style);
 
     this.root.appendChild(style);
 
@@ -17,7 +17,6 @@ export class GameList extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('connected');
     const template = document.getElementById('gameList');
     const content = template.content.cloneNode(true);
     this.root.appendChild(content);
@@ -33,7 +32,6 @@ export class GameList extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // console.log('disconnected');
     window.removeEventListener('onChangeGames', this.renderHandler);
   }
 
