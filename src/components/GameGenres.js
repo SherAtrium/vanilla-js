@@ -15,6 +15,7 @@ export class GameGenres extends HTMLElement {
   }
 
   setActiveGenre() {
+    // We will need to specify this from Router.JS
     const paramId = history.state.paramId;
 
     document.querySelectorAll('.genre').forEach((genre) => {

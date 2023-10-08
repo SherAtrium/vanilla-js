@@ -1,17 +1,17 @@
-import Router from './router/router.js';
+import { Router } from './router/router.js';
 import { middleware } from './services/api.js';
 import Store from './store/store.js';
 
 import { GameCard } from './components/GameCard.js';
 import { GameGenres } from './components/GameGenres.js';
 import { GameList } from './components/GameList.js';
-import { Navbar } from './components/Navbar.js';
+import { Navbar } from './components/NavBar.js';
 
-// Defining web components
+// Defining Web Components
 customElements.define('game-genres', GameGenres);
-customElements.define('nav-bar', Navbar);
 customElements.define('game-list', GameList);
 customElements.define('game-card', GameCard);
+customElements.define('nav-bar', Navbar);
 
 window.app = {};
 app.store = Store;
@@ -30,9 +30,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     aside.appendChild(gameGenres);
     main.appendChild(navBar);
 
-    // Should be at the end all the time
-    app.router.init();
+    // Must be at the end all the time
+    app.router.initialize();
   } catch (error) {
-    console.error(`Error message: ${error.message}`);
+    throw new Error('Handled message:', error.message);
   }
 });

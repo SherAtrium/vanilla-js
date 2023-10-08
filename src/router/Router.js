@@ -1,32 +1,29 @@
 import { getIdFromPathname } from './utils.js';
 
-const Router = {
-  init: () => {
-    document.querySelectorAll('a.link').forEach((a) => {
-      a.addEventListener('click', (event) => {
+export const Router = {
+  initialize: () => {
+    const allAnchors = document.querySelectorAll('a.link');
+    allAnchors.forEach((anchor) => {
+      anchor.addEventListener('click', (event) => {
         event.preventDefault();
         const url = event.currentTarget.getAttribute('href');
         if (url !== location.pathname) {
-          Router.go(url);
+          Router.route(url);
         }
       });
     });
 
-    // when we go back we don't want to add path to history
-    window.addEventListener('popstate', (event) => {
-      Router.go(event.state.route, false);
-    });
-
-    // We want to render initial component when first page opens or manually refresh happens
+    // We want to render initial component when first page opens
+    // or manually refresh happens
     const path = location.pathname === '/' ? '/all-games' : location.pathname;
-    Router.go(path);
+    Router.route(path);
   },
 
-  go: (route, addToHistory = true) => {
+  route: (route, addToHistory = true) => {
     if (addToHistory) {
       // in state we can add more stuff:
-      // like screen position, when we go to some page and go back we can scroll to the previous position.
-      // and we need route in state that we can get access to it within popstate listener
+      // like screen position, when we go to some page and go back we can scroll
+      // to the previous position.
       history.pushState(
         { route, paramId: getIdFromPathname(route) },
         '',
@@ -40,6 +37,7 @@ const Router = {
 
     switch (route) {
       case '/all-games':
+        // we will create gameList component
         pageElement = document.createElement('game-list');
         break;
 
@@ -68,12 +66,10 @@ const Router = {
 
       main.appendChild(pageElement);
 
-      window.scrollX = 0;
-      window.scrollY = 0;
+      // window.scrollX = 0;
+      // window.scrollY = 0;
     } else {
       document.querySelector('main').innerHTML = 'Oops, 404 Page Not Found!';
     }
   },
 };
-
-export default Router;

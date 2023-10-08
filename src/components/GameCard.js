@@ -1,3 +1,5 @@
+import { AVAILABLE_ICONS } from '../utils/constants.js';
+
 export class GameCard extends HTMLElement {
   constructor() {
     super();
@@ -7,6 +9,7 @@ export class GameCard extends HTMLElement {
     const template = document.getElementById('gameCard');
     const content = template.content.cloneNode(true);
     this.appendChild(content);
+
     this.render();
   }
 
@@ -17,34 +20,19 @@ export class GameCard extends HTMLElement {
     return null;
   };
 
-  getPlatformIcon = (name) => {
-    const availableIcons = {
-      playstation: '/assets/icons/playstation4.svg',
-      linux: '/assets/icons/linux.svg',
-      mobile: '/assets/icons/mobile.svg',
-      'xbox-one': '/assets/icons/xbox-one.svg',
-      'nintendo-switch': '/assets/icons/nintendo-switch.svg',
-    };
-
-    if (name.startsWith('playstation')) {
-      return availableIcons.playstation;
-    }
-
-    if (availableIcons[name]) {
-      return availableIcons[name];
-    }
-
-    return null;
-  };
+  getPlatformIcon = (name) =>
+    name.startsWith('playstation')
+      ? AVAILABLE_ICONS.playstation
+      : AVAILABLE_ICONS[name];
 
   renderPlatformIcons = (platform) => {
     const iconUrl = this.getPlatformIcon(platform.platform.slug);
     if (iconUrl) {
       const template = `
-          <li>
-            <img src="${iconUrl}">
-          </li>
-        `;
+        <li>
+          <img src="${iconUrl}">
+        </li>
+      `;
       this.querySelector('ul.platforms').innerHTML += template;
     }
   };
@@ -55,10 +43,10 @@ export class GameCard extends HTMLElement {
 
   toggleFavoriteButton = (button, gameData) => {
     if (this.checkFavoriteList(gameData.id)) {
-      button.textContent = 'Remove from favorite';
+      button.innerText = 'Remove from favorite';
       button.classList.add('active');
     } else {
-      button.textContent = 'Add to favorite';
+      button.innerText = 'Add to favorite';
       button.classList.remove('active');
     }
   };
@@ -74,30 +62,28 @@ export class GameCard extends HTMLElement {
   };
 
   render() {
-    const id = JSON.parse(this.dataset.gameId);
+    const id = Number(this.dataset.gameId);
     const gameData = this.findDataById(id);
-
     const $ = (el) => this.querySelector(el);
     const favoriteButton = $('.favoriteButton');
-    this.toggleFavoriteButton(favoriteButton, gameData);
 
     if (gameData) {
       gameData.platforms.forEach(this.renderPlatformIcons);
 
       $('img').src = gameData.background_image;
       $('a.title').textContent = gameData.name;
-      $('a.title').href = ''; // TODO: Implement game-info page
+      $('a.title').href = '#'; // TODO: Implement game-info page
       $('.releaseDateValue').textContent = gameData.released;
       $('.relatedGenres .relatedGenresValue').textContent = gameData.genres
         .map((i) => i.name)
         .join(', ');
-
-      favoriteButton.textContent = 'Add to favorite';
-      favoriteButton.onclick = () => this.onFavoriteButtonClick(gameData);
+      favoriteButton.innerText = 'Add to favorite'; // #1
+      favoriteButton.onclick = () => this.onFavoriteButtonClick(gameData); // #2
 
       window.addEventListener('onChangeFavoriteList', () =>
         this.toggleFavoriteButton(favoriteButton, gameData)
       );
+      this.toggleFavoriteButton(favoriteButton, gameData); // #3
     }
   }
 }

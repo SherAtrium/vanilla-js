@@ -36,27 +36,26 @@ export class GameList extends HTMLElement {
   }
 
   render() {
-    const games = app.store.games;
-    if (games) {
-      this.root.querySelector('h2').textContent = this.dataset.genreId
-        ? getGenreTitleById(Number(this.dataset.genreId), app.store.genres)
-        : 'All Games';
+    const { games, genres } = app.store;
+    const genreId = this.dataset.genreId;
+    const $ = (el) => this.root.querySelector(el);
 
-      this.root.querySelector('div.list').textContent = '';
+    $('h2').textContent = genreId
+      ? getGenreTitleById(Number(genreId), genres)
+      : 'All Games';
 
-      if (games.length === 0) {
-        this.root.querySelector('div.list').innerHTML =
-          'No data has been found :(';
-      } else {
-        const gameCards = games.map((game) => {
-          const gameCard = document.createElement('game-card');
-          gameCard.dataset.gameId = JSON.stringify(game.id);
-          return gameCard;
-        });
-        this.root.querySelector('div.list').append(...gameCards);
-      }
+    // When we will filter, we need to clear content
+    this.root.querySelector('div.list').textContent = '';
+
+    if (games.length === 0) {
+      $('div.list').innerHTML = 'No data has been found :(';
     } else {
-      this.root.querySelector('h2').textContent = 'Loading...';
+      const gameCards = games.map((game) => {
+        const gameCard = document.createElement('game-card');
+        gameCard.dataset.gameId = JSON.stringify(game.id);
+        return gameCard;
+      });
+      $('div.list').append(...gameCards);
     }
   }
 }

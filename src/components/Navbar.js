@@ -1,4 +1,5 @@
 import { middleware } from '../services/api.js';
+import { INPUT_DEBOUNCE_MS } from '../utils/constants.js';
 
 export class Navbar extends HTMLElement {
   constructor() {
@@ -16,7 +17,6 @@ export class Navbar extends HTMLElement {
   }
 
   render() {
-    console.log('render');
     const favoriteCount = this.querySelector('.count');
     // Favorite count
     window.addEventListener('onChangeFavoriteList', () => {
@@ -29,13 +29,14 @@ export class Navbar extends HTMLElement {
     });
 
     this.querySelector('.searchInput').addEventListener('input', (event) => {
+      // using debounce to prevent multiple requests
       if (this.timeoutId) {
         clearTimeout(this.timeoutId);
       }
 
       this.timeoutId = setTimeout(() => {
         middleware.filterGamesByName(event.target.value);
-      }, 256);
+      }, INPUT_DEBOUNCE_MS);
     });
   }
 }

@@ -6,8 +6,8 @@ const Store = {
 };
 
 const _proxyStore = new Proxy(Store, {
-  set(target, property, value) {
-    target[property] = value;
+  set(target, property, newValue) {
+    target[property] = newValue;
 
     if (property === 'genres') {
       window.dispatchEvent(new Event('onChangeGenres'));
