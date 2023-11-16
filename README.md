@@ -13,6 +13,6 @@
 This project is not just a coding exercise, but a parody on VanillaJS, exploring the limits of what can be achieved with pure JavaScript. It's an ongoing effort, constantly evolving with the addition of more cool features and optimizations. 😉
 
 
-### To run project:
-Please, add this line to your VSCode `settings.json`
+## Before you run the project:
+Please, add this line to your VSCode `settings.json`:
 - `"liveServer.settings.file": "index.html"`
